@@ -1,0 +1,30 @@
+{
+  "tests": [
+    {
+      "name": "Get card balance",
+      "method": "GET",
+      "path": "/?action=balance&card_number=2202 2032 4554 4491",
+      "expectedStatus": 200,
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get transactions",
+      "method": "GET",
+      "path": "/?action=transactions&card_number=2202 2032 4554 4491",
+      "expectedStatus": 200,
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Add money to card",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "add_money",
+        "card_number": "2202 2032 4554 4491",
+        "amount": 1000
+      },
+      "expectedStatus": 200,
+      "bodyMatcher": "partial"
+    }
+  ]
+}
