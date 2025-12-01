@@ -13,6 +13,8 @@ interface BankCard {
   balance: number;
   type: 'debit' | 'credit';
   gradient: string;
+  expiry?: string;
+  cvv?: string;
 }
 
 interface Transaction {
@@ -33,17 +35,12 @@ export default function Index() {
   const cards: BankCard[] = [
     {
       id: '1',
-      number: '4532 **** **** 1234',
+      number: '2202 2032 4554 4491',
       balance: 125840.50,
       type: 'debit',
-      gradient: 'from-purple-600 via-violet-600 to-indigo-600'
-    },
-    {
-      id: '2',
-      number: '5425 **** **** 5678',
-      balance: 47320.00,
-      type: 'credit',
-      gradient: 'from-blue-500 via-cyan-500 to-teal-500'
+      gradient: 'from-purple-600 via-violet-600 to-indigo-600',
+      expiry: '11/26',
+      cvv: '648'
     }
   ];
 
@@ -157,13 +154,20 @@ export default function Index() {
                     </div>
 
                     <div className="flex justify-between items-end">
-                      <div>
+                      <div className="flex-1">
                         <p className="text-white/70 text-xs mb-1">Доступно</p>
                         <p className="text-white text-2xl font-bold">
                           {card.balance.toLocaleString('ru-RU')} ₽
                         </p>
                       </div>
-                      <Icon name="Contactless" size={24} className="text-white/80" />
+                      <div className="flex flex-col items-end gap-2">
+                        {card.expiry && (
+                          <p className="text-white/80 text-sm font-mono">{card.expiry}</p>
+                        )}
+                        {card.cvv && (
+                          <p className="text-white/60 text-xs font-mono">CVV: {card.cvv}</p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
